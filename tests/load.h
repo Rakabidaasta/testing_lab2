@@ -17,8 +17,9 @@ TEST(load, text_exists)
 
 TEST(load, text_doesnt_exists)
 {
-    text txt;
-    remove_all(txt);
+    text txt = NULL;
+
+    EXPECT_DEATH(remove_all(txt), "");
 }
 
 #endif // LOAD_H
