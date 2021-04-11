@@ -3,7 +3,7 @@
 
 #include "all_tests.h"
 
-TEST(load, initial)
+TEST(load, text_exists)
 {
     text txt = create_text();
     append_line(txt, "test_load");
@@ -12,6 +12,12 @@ TEST(load, initial)
 
     load(txt, test_file_1.toStdString());
 
+    remove_all(txt);
+}
+
+TEST(load, text_doesnt_exists)
+{
+    text txt;
     remove_all(txt);
 }
 
