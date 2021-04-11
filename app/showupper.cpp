@@ -36,10 +36,15 @@ static void show_line(int index, std::string contents, int cursor, void *data)
     UNUSED(data);
 
     /*Выделяем память под копию текущей строки */
-    char *contents_copy = (char *) malloc((MAXLINE + 1) * sizeof(char));
+    char *contents_copy = new char[MAXLINE + 1];
 
     /*Копируем текующую строку */
-    strcpy(contents_copy, contents.c_str());
+    if(contents.length() <= MAXLINE) {
+        strcpy(contents_copy, contents.c_str());
+    } else {
+        delete[] contents_copy;
+        return;
+    }
 
     /*Поднимаем регистр в копии строки */
     char *c = contents_copy;
@@ -51,5 +56,5 @@ static void show_line(int index, std::string contents, int cursor, void *data)
     /* Выводим копию строки на экран */
     printf("%s\n", contents_copy);
 
-    free(contents_copy);
+    delete[] contents_copy;
 }
