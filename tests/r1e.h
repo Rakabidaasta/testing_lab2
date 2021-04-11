@@ -98,26 +98,22 @@ TEST(r1e, one_str)
     text txt = create_text();
     append_line(txt, "");
 
-    testing::internal::CaptureStdout();
-
     r1e(txt);
-    show(txt);
-    std::string text = testing::internal::GetCapturedStdout();
 
-    EXPECT_STREQ(text.c_str(), output_text.c_str());
+    ASSERT_DEATH(show(txt), "");
 }
 
 TEST(r1e, nothing)
 {
-    std::string output_text = "";
+    std::string output_text = "There are already no any lines in the text!\n";
 
     text txt = create_text();
 
-    testing::internal::CaptureStdout();
+    testing::internal::CaptureStderr();
 
     r1e(txt);
     show(txt);
-    std::string text = testing::internal::GetCapturedStdout();
+    std::string text = testing::internal::GetCapturedStderr();
 
     EXPECT_STREQ(text.c_str(), output_text.c_str());
 }
