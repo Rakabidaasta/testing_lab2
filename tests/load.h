@@ -15,11 +15,4 @@ TEST(load, text_exists)
     remove_all(txt);
 }
 
-TEST(load, text_doesnt_exists)
-{
-    text txt = NULL;
-
-    EXPECT_DEATH(remove_all(txt), "");
-}
-
 #endif // LOAD_H
