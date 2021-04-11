@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
 
 #include "common.h"
 #include "text/text.h"
@@ -19,24 +20,23 @@
  */
 void load(text txt, std::string filename)
 {
-    FILE *f;
+    std::ifstream f;
+    f.open(filename);
 
-    char buf[MAXLINE + 1];
-
-    /* Открываем файл для чтения, контролируя ошибки */
-    if ((f = fopen(filename.c_str(), "r")) == NULL) {
-        std::cout << "The file " << filename << " cannot be opened\n";
+    if (!f.good()) {
+        std::cerr << "The file " << filename << " cannot be opened\n";
         return;
     }
 
     /* Удаляем предыдущее содержимое */
     remove_all(txt);
 
-    /* Считываем содержимое строка за строкой */
-    while (fgets(buf, MAXLINE, f)) {
-        buf[strlen(buf) - 1] = '\0';
-        append_line(txt, std::string(buf));
+    std::string buf;
+
+    while (f.good()) {
+        f.getline(&buf[0], MAXLINE);
+        append_line(txt, buf);
     }
 
-    fclose(f);
+    f.close();
 }
