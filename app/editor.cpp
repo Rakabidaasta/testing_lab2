@@ -30,7 +30,7 @@ static int split(std::string &str_in, std::string &str_out, char del)
     if (str_in == "") return -1;
 
     int pos = 0;
-    if ((pos = str_in.find(del)) == -1) {
+    if ((pos = (int) str_in.find(del)) == -1) {
         str_out = str_in;
         str_in.erase(str_in.begin(), str_in.end());
     } else {
@@ -118,12 +118,8 @@ int main()
 
         /*Обработка команды m Татьяна Квист */
         if (cmd == "m") {
-            if (split(cmdline, line, del) == 0) {
-                if (split(cmdline, line2, del) == 0) {
+            if (split(cmdline, line, del) == 0 && split(cmdline, line2, del) == 0) {
                     m(txt, atoi(line.c_str()), atoi(line2.c_str()));
-                } else {
-                    std::cerr << "Usage: m line_number cursor\n";
-                }
             } else {
                 std::cerr << "Usage: load filename\n";
             }
