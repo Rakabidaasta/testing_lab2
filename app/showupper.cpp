@@ -42,7 +42,7 @@ static void show_line(int index, std::string contents, int cursor, void *data)
     strcpy(contents_copy, contents.c_str());
 
     /*Поднимаем регистр в копии строки */
-    char *c = contents_copy[0];
+    char *c = contents_copy;
     while (*c) {
         *c = toupper(*c);
         c++;
