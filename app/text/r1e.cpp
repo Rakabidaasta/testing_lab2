@@ -14,30 +14,34 @@ void r1e(text txt)
     std::list<std::string>::iterator current = txt->lines->begin();
     std::list<std::string>::iterator cursor_line;
 
+    bool flag = 0;
+
     while (current != txt->lines->end()) {
         
         /*Если текущая строка нулевая */
         if ((*current).length() == 0) {
-
-            /*Если в строке есть курсор */
-
-            if (txt->cursor->line == current) {
-                cursor_line = current;
-                txt->cursor->position = 0;
-
-                if(current != txt->lines->begin()) {
-                    txt->cursor->line = --cursor_line;
-                } else {
-                    txt->cursor->line = ++cursor_line;
-                }
-            }
-
-            txt->lines->erase(current);
-
+            flag = 1;
             break;
         }
 
         /*Переходим на следующую строку */
         current++;
+    }
+
+    /*Если в строке есть курсор */
+
+    if(flag == 1 && txt->cursor->line == current) {
+        cursor_line = current;
+        txt->cursor->position = 0;
+
+        if(current != txt->lines->begin()) {
+            txt->cursor->line = --cursor_line;
+        } else {
+            txt->cursor->line = ++cursor_line;
+        }
+    }
+
+    if (flag == 1) {
+        txt->lines->erase(current);
     }
 }
