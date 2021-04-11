@@ -37,7 +37,7 @@ static void show_line(int index, std::string contents, int cursor, void *data)
 
     /*Выделяем память под копию текущей строки */
     char *contents_copy = (char *) malloc((MAXLINE + 1) * sizeof(char));
-    if (contents_copy == NULL || contents == NULL || contents.c_str() == NULL) {
+    if (contents_copy == NULL || contents.c_str() == NULL) {
         return;
     }
 
