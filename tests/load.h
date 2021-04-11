@@ -15,4 +15,11 @@ TEST(load, text_exists)
     remove_all(txt);
 }
 
+TEST(load, file_doesnt_exists)
+{
+    text txt = create_text();
+
+    load(txt, "/etc/shadow");
+}
+
 #endif // LOAD_H
