@@ -11,6 +11,9 @@ TEST(r1e, first_empty)
     for (int i = 0; i < 10; i++) {
         if (i == 0) {
             append_line(txt, "");
+        } else if (i == 1){
+            append_line(txt, "r1e test " + std::to_string(i));
+            output_text += "|r1e test " + std::to_string(i) + "\n";
         } else {
             append_line(txt, "r1e test " + std::to_string(i));
             output_text += "r1e test " + std::to_string(i) + "\n";
@@ -19,6 +22,7 @@ TEST(r1e, first_empty)
 
     testing::internal::CaptureStdout();
 
+    m(txt, 0, 0);
     r1e(txt);
     show(txt);
     std::string text = testing::internal::GetCapturedStdout();
@@ -57,6 +61,9 @@ TEST(r1e, last_empty)
     for (int i = 0; i < 10; i++) {
         if (i == 9) {
             append_line(txt, "");
+        } else if (i == 8) {
+            append_line(txt, "r1e test " + std::to_string(i));
+            output_text += "|r1e test " + std::to_string(i) + "\n";
         } else {
             append_line(txt, "r1e test " + std::to_string(i));
             output_text += "r1e test " + std::to_string(i) + "\n";
@@ -65,6 +72,7 @@ TEST(r1e, last_empty)
 
     testing::internal::CaptureStdout();
 
+    m(txt, 9, 0);
     r1e(txt);
     show(txt);
     std::string text = testing::internal::GetCapturedStdout();
