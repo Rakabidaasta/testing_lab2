@@ -11,6 +11,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <stdlib.h>
+#include <iostream>
 #include "common.h"
 #include "text/text.h"
 
@@ -35,19 +36,11 @@ static void show_line(int index, std::string contents, int cursor, void *data)
     UNUSED(cursor);
     UNUSED(data);
 
-    /*Выделяем память под копию текущей строки */
-    char *contents_copy = (char *) malloc((MAXLINE + 1) * sizeof(char));
+    for(int i = 0; i < (int) contents.length(); i++ ) {
 
-    /*Копируем текующую строку */
-    strcpy(contents_copy, contents.c_str());
-
-    /*Поднимаем регистр в копии строки */
-    char *c = contents_copy;
-    while (*c) {
-        *c = toupper(*c);
-        c++;
+        /* Выводим изменённые символы */
+        std::cout << (char) toupper(contents[i]);
     }
 
-    /* Выводим копию строки на экран */
-    printf("%s\n", contents_copy);
+    std::cout << std::endl;
 }
