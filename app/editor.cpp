@@ -10,42 +10,70 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <iostream>
 
 #include "text/text.h"
 #include "common.h"
 
 #define MAXLINE 255
 
+static int split(std::string &str_in, std::string &str_out, char del)
+{
+    int i = 0;
+
+    while (str_in[i] == del) {
+        i++;
+    }
+
+    str_in.erase(0, i);
+
+    if (str_in == "") return -1;
+
+    int pos = 0;
+    if ((pos = str_in.find(del)) == -1) {
+        str_out = str_in;
+        str_in.erase(str_in.begin(), str_in.end());
+    } else {
+        str_out = str_in.substr(0, pos);
+        str_in.erase(0, pos + 1);
+    }
+
+    return 0;
+}
+
 int main()
 {
-    char cmdline[MAXLINE + 1];
-    char *cmd;
-    char *arg;
-    char *arg2;
+    std::string cmdline;
+    char del = ' ';
+    std::string cmd;
+    std::string line;
+    std::string line2;
 
     /* Создаем объект для представления текста */
     text txt = create_text();
 
     /* Цикл обработки команд */
-    while (1) {
-        printf("ed > ");
+    while (true) {
+        std::cout << "ed > ";
 
         /* Получаем команду */
-        fgets(cmdline, MAXLINE, stdin);
+        std::cin >> cmdline;
+
+        split(cmdline, cmd, del);
 
         /* Извлекаем имя команды */
-        if ((cmd = strtok(cmdline, " \n")) == NULL) {
+        if (cmd == "") {
             continue;
         }
 
         /* Распознаем поддерживаемую команду */
 
         /* Загружаем содержимое файла, заданного параметром */
-        if (strcmp(cmd, "load") == 0) {
-            if ((arg = strtok(NULL, " \n")) == NULL) {
-                fprintf(stderr, "Usage: load filename\n");
+        if (cmd == "load") {
+            if (split(cmdline, line, del) == 0) {
+                load(txt, line);
             } else {
-                load(txt, arg);
+                std::cerr << "Usage: load filename\n";
             }
 
             /*Сдвигаем курсор в нулевую позицию */
@@ -56,24 +84,24 @@ int main()
         }
 
         /*Обработка команды save */
-        if (strcmp(cmd, "save") == 0) {
-            if ((arg = strtok(NULL, " \n")) == NULL) {
-                fprintf(stderr, "Usage: save filename\n");
+        if (cmd == "save") {
+            if (split(cmdline, line, del) == 0) {
+                save(txt, line);
             } else {
-                save(txt, arg);
+                std::cerr << "Usage: save filename\n";
             }
             continue;
         }
 
         /* Выводим текст */
-        if (strcmp(cmd, "show") == 0) {
+        if (cmd == "show") {
             show(txt);
             continue;
         }
 
         /* Завершаем работу редактора */
-        if (strcmp(cmd, "q") == 0) {
-            fprintf(stderr, "Bye!\n");
+        if (cmd == "q") {
+            std::cout << "Bye!\n";
             break;
         }
 
@@ -81,7 +109,7 @@ int main()
         /*__________________________________Изменённый вывод__________________________________*/
 
         /* Выводим текст с капитализацией всех символов Татьяна Квист + */
-        if (strcmp(cmd, "showupper") == 0) {
+        if (cmd == "showupper") {
             showupper(txt);
             continue;
         }
@@ -89,35 +117,34 @@ int main()
         /*__________________________________Библиотечные функции__________________________________*/
 
         /*Обработка команды m Татьяна Квист */
-        if (strcmp(cmd, "m") == 0) {
-            if ((arg = strtok(NULL, " \n")) == NULL) {
-                fprintf(stderr, "Usage: m line_number cursor\n");
-            } else {
-                if ((arg2 = strtok(NULL, " \n")) == NULL) {
-                    fprintf(stderr, "Usage: m line_number cursor\n");
+        if (cmd == "m") {
+            if (split(cmdline, line, del) == 0) {
+                if (split(cmdline, line2, del) == 0) {
+                    m(txt, atoi(line.c_str()), atoi(line2.c_str()));
                 } else {
-                    if (m(txt, atoi(arg), atoi(arg2)) != 0) {
-                        fprintf(stderr, "Invalid arguments\n");
-                    }
+                    std::cerr << "Usage: m line_number cursor\n";
                 }
+            } else {
+                std::cerr << "Usage: load filename\n";
             }
+
             continue;
         }
 
         /*Для перемещения курсора в начало строки Татьяна Квист */
-        if (strcmp(cmd, "mlb") == 0) {
+        if (cmd == "mlb") {
             mlb(txt);
             continue;
         }
 
         /*Удаление первой пустой строки Татьяна Квист */
-        if (strcmp(cmd, "r1e") == 0) {
+        if (cmd == "r1e") {
             r1e(txt);
             continue;
         }
 
         /* Если команда не известна */
-        fprintf(stderr, "Unknown command: %s\n", cmd);
+        std::cerr << "Unknown command: " << cmd << std::endl;
     }
 
     return 0;

@@ -34,6 +34,6 @@ void save(text txt, std::string filename);
 /**
  * Загружает содержимое указанного файла
  */
-void load(text txt, char *filename);
+void load(text txt, std::string filename);
 
 #endif

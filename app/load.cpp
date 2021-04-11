@@ -15,15 +15,15 @@
 /**
  * Загружает содержимое указанного файла
  */
-void load(text txt, char *filename)
+void load(text txt, std::string filename)
 {
     FILE *f;
 
     char buf[MAXLINE + 1];
 
     /* Открываем файл для чтения, контролируя ошибки */
-    if ((f = fopen(filename, "r")) == NULL) {
-        printf("The file %s cannot be opened\n", filename);
+    if ((f = fopen(filename.c_str(), "r")) == NULL) {
+        printf("The file %s cannot be opened\n", filename.c_str());
         return;
     }
 
