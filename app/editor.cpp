@@ -15,8 +15,6 @@
 #include "text/text.h"
 #include "common.h"
 
-#define MAXLINE 255
-
 static int split(std::string &str_in, std::string &str_out, char del)
 {
     int i = 0;

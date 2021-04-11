@@ -12,7 +12,7 @@
 
 #include <string>
 
-#define MAXLINE 255
+constexpr int MAXLINE = 255;
 
 /**
  * Абстрактный тип текстовых объектов
