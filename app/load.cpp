@@ -9,6 +9,8 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <iostream>
+
 #include "common.h"
 #include "text/text.h"
 
@@ -23,7 +25,7 @@ void load(text txt, std::string filename)
 
     /* Открываем файл для чтения, контролируя ошибки */
     if ((f = fopen(filename.c_str(), "r")) == NULL) {
-        printf("The file %s cannot be opened\n", filename.c_str());
+        std::cout << "The file " << filename << " cannot be opened\n";
         return;
     }
 

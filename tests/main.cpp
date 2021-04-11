@@ -3,6 +3,7 @@
 #include "mlb.h"
 #include "m.h"
 #include "r1e.h"
+#include "load.h"
 
 #include <gtest/gtest.h>
 

@@ -28,6 +28,7 @@ HEADERS += \
     ../app/text/text.h \
     ../app/text/_text.h \
     ../app/common.h \
+    load.h \
     m.h \
     mlb.h \
     r1e.h \
