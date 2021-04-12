@@ -201,6 +201,27 @@ TEST(m, minus_str)
     free(txt);
 }
 
+TEST(m, more_str)
+{
+    std::string output_text = "";
+
+    text txt = create_text();
+    for (int i = 0; i < 10; i++) {
+        append_line(txt, "m test " + std::to_string(i));
+        output_text += "m test " + std::to_string(i) + "\n";
+    }
+
+    testing::internal::CaptureStdout();
+
+    m(txt, 100, 100);
+    show(txt);
+    std::string text = testing::internal::GetCapturedStdout();
+
+    EXPECT_STREQ(text.c_str(), output_text.c_str());
+
+    free(txt);
+}
+
 TEST(m, minus_pos)
 {
     std::string output_text = "";
