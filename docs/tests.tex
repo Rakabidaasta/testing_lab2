@@ -1,0 +1,227 @@
+\documentclass{article}
+\usepackage{geometry}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+
+\geometry{bmargin = 80pt, lmargin = 80pt, tmargin = 80pt, rmargin = 80pt}
+
+\begin{document}
+\section{Тестирование функции save}
+\subsection{without\_empty\_strs}
+Входные данные -- файл, содержащий 10 строк типа $"\; string\; i\; \textbackslash n"$, где i -- номер строки.\\
+Ожидаемый результат: 
+\begin{itemize}
+    \item line\_file[i] == line\_text[i], где line\_file -- данные из файла, а line\_text -- строки из txt. 
+\end{itemize}
+\subsection{with\_empty\_strs}
+Входные данные -- файл, содержащий 10 строк типа $"\; string\; i\; \textbackslash n \textbackslash n"$, где i -- номер строки.\\
+Ожидаемый результат: 
+\begin{itemize}
+    \item line\_file[i] == line\_text[i], где line\_file -- данные из файла, а line\_text -- строки из txt.
+\end{itemize}
+\subsection{empty\_strs}
+Входные данные -- файл, содержащий 10 строк типа $"\textbackslash n"$.\\
+Ожидаемый результат: 
+\begin{itemize}
+    \item line\_file[i] == line\_text[i], где line\_file -- данные из файла, а line\_text -- строки из txt.
+\end{itemize}
+\subsection{one\_str}
+Входные данные -- файл, содержащий 1 пустую строку.\\
+Ожидаемый результат:
+\begin{itemize}
+    \item line\_file[i] == line\_text[i], где line\_file -- данные из файла, а line\_text -- строки из txt.
+\end{itemize}
+
+\subsection{nothing}
+Входные данные -- файл, не содержащий строк.\\
+Ожидаемый результат: 
+\begin{itemize}
+    \item line\_file[i] == line\_text[i], где line\_file -- данные из файла, а line\_text -- строки из txt.
+\end{itemize}
+\newpage
+
+\section{Тестирование функции showupper}
+\subsection{lower\_ints}
+Входные данные -- файл, содержащий строки, в которых символы нижнего регистра и цифры.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{upper\_ints}
+Входные данные -- файл, содержащий строки, в которых символы верхнего регистра и цифры.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{ints}
+Входные данные -- файл, содержащий строки, в которых только цифры.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{lower\_upper}
+Входные данные -- файл, содержащий строки, в которых символы верхнего, нижнего регистров и цифры.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{nothing}
+Входные данные -- файл, не содержащий строк.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\newpage
+
+
+\section{Тестирование функции mlb}
+\subsection{on\_first\_begin}
+Входные данные -- непустой файл, курсор стоит в начале первой строки.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале первой строки.
+\end{itemize}
+\subsection{on\_first}
+Входные данные -- непустой файл, курсор стоит на первой строке.\\
+Ожидаемый результат: перехват данных из std::cout, курсор должен перейти в начало строки.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале первой строки.
+\end{itemize}
+\subsection{on\_center\_begin}
+Входные данные -- непустой файл, курсор стоит в начале пятой строки.\\
+Ожидаемый результат: перехват данных из std::cout, курсор должен перейти в начало строки.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале пятой строки.
+\end{itemize}
+\subsection{on\_center}
+Входные данные -- непустой файл, курсор стоит в пятой строке.\\
+Ожидаемый результат: перехват данных из std::cout, курсор должен перейти в начало строки.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале пятой строки.
+\end{itemize}
+\subsection{on\_last\_begin}
+Входные данные -- непустой файл, курсор стоит в начале последней строки.\\
+Ожидаемый результат: перехват данных из std::cout, курсор должен перейти в начало строки.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале последней строки.
+\end{itemize}
+\subsection{on\_last}
+Входные данные -- непустой файл, курсор стоит в последней строке.\\
+Ожидаемый результат: перехват данных из std::cout, курсор должен перейти в начало строки.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале последней строки.
+\end{itemize}
+\newpage
+
+\section{Тестирование функции m}
+\subsection{on\_first\_begin}
+Входные данные -- непустой файл, курсор ставится в начале первой строки.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == '|' + txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{on\_first}
+Входные данные -- непустой файл, курсор ставится на первой строке.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит на первой строке.
+\end{itemize}
+\subsection{on\_center\_begin}
+Входные данные -- непустой файл, курсор ставится в начале пятой строки.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале пятой строки.
+\end{itemize}
+\subsection{on\_center}
+Входные данные -- непустой файл, курсор ставится в пятой строке.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в пятой строки.
+\end{itemize}
+\subsection{on\_last\_begin}
+Входные данные -- непустой файл, курсор ставится в начале последней строки.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в начале последней строки.
+\end{itemize}
+\subsection{on\_last}
+Входные данные -- непустой файл, курсор ставится в последней строке.\\
+Ожидаемый результат: перехват данных из std::cout.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt, курсор стоит в последней строки.
+\end{itemize}
+\subsection{out\_of\_str}
+Входные данные -- непустой файл, курсор ставится на позиции, большей, чем длина шестой строки (cursor\_pos = 100).\\
+Ожидаемый результат: перехват данных из std::cout, курсор стоит после последнего символа шестой строки.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{minus\_str}
+Входные данные -- непустой файл, курсор ставится на отрицательной строке.\\
+Ожидаемый результат: перехват данных из std::cout, позиция курсора не изменится.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{more\_str}
+Входные данные -- непустой файл, курсор ставится на несуществующей строке.\\
+Ожидаемый результат: перехват данных из std::cout, позиция курсора не изменится.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{minus\_pos}
+Входные данные -- непустой файл, курсор ставится на отрицательной позиции.\\
+Ожидаемый результат: перехват данных из std::cout, позиция курсора не изменится.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{empty\_str}
+Входные данные -- непустой файл.\\
+Ожидаемый результат: перехват данных из std::cout, курсор ставится на указанную пустую строку.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{one\_str}
+Входные данные -- непустой файл.\\
+Ожидаемый результат: перехват данных из std::cout, курсор ставится на первую строку.
+\begin{itemize}
+    \item text == txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt.
+\end{itemize}
+\subsection{nothing}
+Входные данные -- пустой файл.\\
+Ожидаемый результат: перехват данных из std::cout, ничего не выводится.
+\newpage
+
+\section{Тестирование функции r1e}
+\subsection{first\_empty}
+Входные данные -- непустой файл, курсор ставится на первую строку, первая строка -- пустая.\\
+Ожидаемый результат: перехват данных из std::cout, первая строка удалена, курсор сдвинут на начало следующей строки.
+\begin{itemize}
+    \item text == '|' + txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt (без первой строки).
+\end{itemize}
+\subsection{center\_empty}
+Входные данные -- непустой файл, пятая строка -- пустая.\\
+Ожидаемый результат: перехват данных из std::cout, пятая строка удалена.
+\begin{itemize}
+    \item text == '|' + txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt (без пятой строки).
+\end{itemize}
+\subsection{last\_empty}
+Входные данные -- непустой файл, последняя строка -- пустая.\\
+Ожидаемый результат: перехват данных из std::cout, последняя строка удалена, курсор сдвинут на начало предыдущей строки.
+\begin{itemize}
+    \item text == '|' + txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt (без последней строки).
+\end{itemize}
+\subsection{no\_empty}
+Входные данные -- непустой файл, пустых строк нет.\\
+Ожидаемый результат: перехват данных из std::cout, текст не изменится.
+\begin{itemize}
+    \item text == '|' + txt, где text -- данные, перехваченные из std::cout, а text -- строки из txt (без последней строки).
+\end{itemize}
+\subsection{one\_str}
+Входные данные -- файл, содержащий только одну пустую строку.\\
+Ожидаемый результат: перехват данных из std::cout, программа закончится с ошибкой (невозможно загрузить "ничего").
+\subsection{nothing}
+Входные данные -- пустой файл.\\
+Ожидаемый результат: перехват данных из std::cout, программа закончится с ошибкой (невозможно загрузить "ничего").
+
+\end{document}
